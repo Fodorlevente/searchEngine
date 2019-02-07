@@ -94,8 +94,12 @@ class SearchEngine{
           select.appendChild(this.createAllSelectOption(i));
           myDiv.appendChild(select);
       }
+
+      search(){
+        this.createCustomSelect(this.getTableHeadings(this.tableId));
+        this.createSearchInputField();
+      }
 }
 
 let mySeachEngine = new SearchEngine("myInput","myTable","myCustomSelect");
-mySeachEngine.createCustomSelect(mySeachEngine.getTableHeadings(mySeachEngine.tableId));
-mySeachEngine.createSearchInputField();
+mySeachEngine.search();
