@@ -1,18 +1,17 @@
       
       function searchAll() {
         var input, filter, found, table, tr, td, i, j;
-        input = document.getElementById("myInput2");
+        input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
-        table = document.getElementById("myTable2");
+        table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
+        for (i = 1; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td");
             for (j = 0; j < td.length; j++) {
                 if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
                     found = true;
                 }
-            }
-            if (found) {
+            }if (found) {
                 tr[i].style.display = "";
                 found = false;
             } else {
@@ -27,18 +26,21 @@
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         select = document.getElementById("Alma");
-        selectedIndex = select.options[select.selectedIndex].value; // etc 1. this is an index
-        console.log(selectedIndex);
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[selectedIndex];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }       
+        selectedIndex = select.options[select.selectedIndex].value;
+        if((select.options[selectedIndex].innerText) == "All attribute"){
+          searchAll();
+        }else{
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[selectedIndex];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }       
+          }
         }
       }
   
@@ -83,7 +85,7 @@
               option.text = headingsList[i];
               select.appendChild(option);
           }
-          select.appendChild(createAllSelectOption(i+1));
+          select.appendChild(createAllSelectOption(i));
           myDiv.appendChild(select);
       }
       createCustomSelect(getTableHeadings("myTable"));
